@@ -72,5 +72,6 @@ docker service create -d --name kong-dashboard \
 
 # open http://192.168.99.100:8080/
 # config Kong node URL: http://192.168.99.100:8001
+# docker service scale kong=3
 
 # for i in 0 1 2; docker-machine rm -f "node$i"; end

@@ -73,5 +73,11 @@ docker service create -d --name kong-dashboard \
 # open http://192.168.99.100:8080/
 # config Kong node URL: http://192.168.99.100:8001
 # docker service scale kong=3
+# docker service scale kong-dashboard=2
+
+# docker service ls                                                                                               03:21:32
+# ID                  NAME                MODE                REPLICAS            IMAGE                         PORTS
+# 3lb50hfchb89        kong-db             replicated          1/1                 healthcheck/postgres:alpine   *:5432->5432/tcp
+# ac6kbu326kr6        kong-dashboard      replicated          1/2                 pgbi/kong-dashboard:latest    *:8080->8080/tcpkqz82v6blyf9        kong                replicated          3/3                 kong:latest                   *:8000->8000/tcp,*:8443->8443/tcp,*:8001->8001/tcp,*:0->7946/tcp
 
 # for i in 0 1 2; docker-machine rm -f "node$i"; end

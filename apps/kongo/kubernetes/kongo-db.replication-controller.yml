@@ -1,0 +1,33 @@
+# kongo db definition:
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: postgres
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: healthcheck/postgres:alpine
+        env:
+        - name: POSTGRES_USER
+          value: kong
+        - name: POSTGRES_PASSWORD
+          value: kong
+        - name: POSTGRES_DB
+          value: kong
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: pg-data
+      # hosted persisten volume:
+      volumes:
+      - name: pg-data
+        emptyDir: {}

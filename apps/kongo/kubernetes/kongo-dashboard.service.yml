@@ -1,0 +1,17 @@
+# expose kongo-dashboard service (the only this will be exposed publically):
+apiVersion: v1
+kind: Service
+metadata:
+  name: kongo-ui
+spec:
+  type: LoadBalancer
+  loadBalancerSourceRanges:
+  - 0.0.0.0/0
+  ports:
+  - name: kongo-ui
+    port: 80
+    targetPort: 8080
+    protocol: TCP
+  selector:
+    # app should mach with deployment: spec.template.labels
+    app: kongo-dashboard

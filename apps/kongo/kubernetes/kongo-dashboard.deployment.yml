@@ -1,0 +1,20 @@
+# deployment definition (combination of pod and replica set):
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kongo-dashboard-rc
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: kongo-dashboard-rc
+        app: kongo-dashboard
+    spec:
+      containers:
+      - name: kongo-dashboard
+        image: pgbi/kong-dashboard
+        ports:
+        - name: dashboard
+          containerPort: 8080
+          protocol: TCP

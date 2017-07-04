@@ -1,0 +1,14 @@
+# expose kongo db:
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+spec:
+  ports:
+  - name: postgres
+    port: 5432
+    targetPort: 5432
+    protocol: TCP
+  selector:
+    # app should mach with deployment: spec.template.labels
+    app: postgres

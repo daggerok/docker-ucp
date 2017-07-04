@@ -1,0 +1,41 @@
+# deployment definition (combination of pod and replica set):
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: kongo
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: kongo
+        app: kongo
+    spec:
+      containers:
+      - name: kongo
+        image: kong
+        env:
+        - name: KONG_PG_USER
+          value: kong
+        - name: KONG_PG_PASSWORD
+          value: kong
+        - name: KONG_PG_DATABASE
+          value: kong
+        - name: KONG_PG_HOST
+          value: postgres
+        ports:
+        - name: admin
+          containerPort: 8001
+          protocol: TCP
+        - name: proxy
+          containerPort: 8000
+          protocol: TCP
+        - name: proxy-ssl
+          containerPort: 8443
+          protocol: TCP
+        - name: surf-tcp
+          containerPort: 7964
+          protocol: TCP
+        - name: surf-udp
+          containerPort: 7964
+          protocol: UDP
